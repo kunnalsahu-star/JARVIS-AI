@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>JARVIS Chat</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/chat.css">
+  <link rel="stylesheet" href="css/image.css">
+  <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+  <div class="app-layout">
+    <aside class="chat-side">
+      <div class="side-top">
+        <a class="brand" href="index.html"><i>J</i> JARVIS</a>
+        <a href="dashboard.html" class="round side-dashboard" aria-label="Dashboard">▦</a>
+      </div>
+      <button id="new-chat" type="button" class="button" data-i18n="New chat">＋ New chat</button>
+      <label class="chat-search"><span>⌕</span><input id="chat-search" placeholder="Search chats" aria-label="Search chats"></label>
+      <div class="history" id="history"></div>
+      <div class="side-foot">
+        <a class="chat-item" href="settings.html">⚙ <span data-i18n="Settings">Settings</span></a>
+        <a class="chat-item" href="index.html">← Back to site</a>
+      </div>
+    </aside>
+    <main class="chat-main">
+      <header class="chat-top">
+        <div>
+          <b id="chat-title">New conversation</b>
+          <div class="status" role="status" aria-live="polite">Checking AI service…</div>
+        </div>
+        <div class="chat-tools">
+          <button id="image-toggle" type="button" class="button ghost small" aria-expanded="false" aria-controls="image-panel">Generate image</button>
+          <div class="menu-wrap">
+            <button id="chat-menu" type="button" class="round" aria-label="Conversation options" aria-expanded="false">•••</button>
+            <div class="drop-menu" id="drop-menu">
+              <button type="button" data-action="rename">Rename</button>
+              <button type="button" data-action="pin">Pin</button>
+              <button type="button" data-action="duplicate">Duplicate</button>
+              <button type="button" data-action="share">Share</button>
+              <button type="button" data-action="export">Export</button>
+              <button type="button" data-action="archive">Archive</button>
+              <button type="button" data-action="delete" class="danger">Delete</button>
+            </div>
+          </div>
+        </div>
+      </header>
+      <section id="image-panel" class="image-panel glass" aria-labelledby="image-heading" hidden>
+        <div class="image-panel-heading">
+          <div>
+            <p class="eyebrow">JARVIS / Image studio</p>
+            <h2 id="image-heading">Generate an image</h2>
+          </div>
+          <button id="image-close" type="button" class="round" aria-label="Close image studio">×</button>
+        </div>
+        <form id="image-form">
+          <label class="image-prompt-label" for="image-prompt">Describe the image you want</label>
+          <textarea id="image-prompt" maxlength="2000" required placeholder="Describe an original image…"></textarea>
+          <div class="image-controls">
+            <span class="muted">Requires a configured Gemini image model. Usage may incur charges.</span>
+            <button id="image-generate" type="submit" class="button small">Generate image</button>
+          </div>
+        </form>
+        <p id="image-status" class="image-status muted" role="status" aria-live="polite"></p>
+        <figure id="image-result" class="image-result" hidden>
+          <img id="generated-image" alt="Image generated from your prompt">
+          <figcaption>
+            <span id="image-caption"></span>
+            <a id="image-download" class="button ghost small" download="jarvis-generated-image.png">Download image</a>
+          </figcaption>
+        </figure>
+      </section>
+      <div class="messages" id="messages"></div>
+      <div class="composer-wrap">
+        <div class="voice-panel glass" role="status" aria-live="polite">
+          <span class="waves"><i></i><i></i><i></i></span>
+          <span id="voice-message">Listening… speak naturally. Review your words before sending.</span>
+        </div>
+        <div class="composer glass">
+          <button id="mic" type="button" class="round" aria-label="Use voice input" title="Use voice input" aria-pressed="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="3" width="6" height="12" rx="3"></rect><path d="M5 11a7 7 0 0 0 14 0M12 18v3m-4 0h8"></path></svg>
+          </button>
+          <textarea id="prompt" rows="1" placeholder="Message JARVIS…" aria-label="Message JARVIS"></textarea>
+          <button id="stop" type="button" class="round hidden" aria-label="Stop generation">■</button>
+          <button id="send" type="button" class="button small" aria-label="Send message">↑</button>
+        </div>
+        <p class="notice">Chats are stored in this browser. Messages are sent to the configured AI provider only when a backend is connected.</p>
+      </div>
+    </main>
+  </div>
+  <script src="js/config.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/voice.js"></script>
+  <script src="js/chat.js"></script>
+</body>
+</html>
